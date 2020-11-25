@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRouter');
+const sauceRoutes = require('./routes/sauceRouter');
 const bodyParser = require('body-parser');
 
 const router = express.Router();
@@ -26,7 +27,7 @@ router.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/auth', userRoutes);
-
+app.use('/api/sauces', sauceRoutes);
 
 
 module.exports = app;
