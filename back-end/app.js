@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRouter');
 const sauceRoutes = require('./routes/sauceRouter');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const router = express.Router();
 
@@ -26,6 +27,10 @@ router.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/images', express.static(path.join(__dirname, '/images')));
+
+
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 

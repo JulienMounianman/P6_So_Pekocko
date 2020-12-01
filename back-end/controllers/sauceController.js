@@ -13,19 +13,29 @@ exports.getOneSauces = (req, res, next) => {
 };
 
 exports.createSauce = (req, res, next) => {
-    const new_sauce = new Sauce({
-        email: req.body.email,
-        password: req.body.password
-    });
-    new_sauce.save()
+    const sauce = req.body.sauce;
+    const img = req.body.image;
+
+    sauce.likes = 0;
+    sauce.dislikes = 0;
+    sauce.usersLikes = [];
+    sauce.disliked = [];
+    
+    //Image?
+ 
+    sauce.save()
         .then(() => res.status(201).json({ message: 'Sauce ajoutéé !' }))
         .catch(error => res.status(400).json({ error }));
 };
 
 exports.updateSauce = (req, res, next) => {
-    Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    if(req.body.image) {
+        //Image?
+    } else {
+        Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Sauce modifié !' }))
         .catch(error => res.status(400).json({ error }));
+    }
 };
 
 exports.deleteOneSauce = (req, res, next) => {
