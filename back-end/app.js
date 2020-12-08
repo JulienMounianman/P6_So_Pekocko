@@ -4,14 +4,14 @@ const userRoutes = require('./routes/userRouter');
 const sauceRoutes = require('./routes/sauceRouter');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const rateLimit = require("express-rate-limit");
 const router = express.Router();
 
 const username = "Admin";
 const password = "Bb48nCa4yFUFYfZ";
 const dbname = "Database";
 const uri = "mongodb+srv://" + username + ":" + password + "@database.dhkdz.mongodb.net/" + dbname + "?retryWrites=true&w=majority";
-
+const helmet = require("helmet");
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -27,12 +27,16 @@ router.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(helmet());
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
 
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
-
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 
+  });
+app.use(limiter);
 
 module.exports = app;
