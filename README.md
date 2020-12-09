@@ -11,6 +11,8 @@ OpenClassrooms - Projet 6 - Développeur Web
 
 ## Setup
 
+Créer un dossier env dans le dossier back-end
+
 Lancer d'abord l'Api
 
 ```
