@@ -12,7 +12,7 @@ OpenClassrooms - Projet 6 - Développeur Web
 ## Setup
 
 - Créer un fichier ".env" dans le dossier back-end.
-- Dans ce fichier, veuillez insérer ceux-ci :
+- Dans ce fichier, veuillez insérer ceux-ci :  
 DB_USERNAME = Admin  
 DB_PASSWORD = Bb48nCa4yFUFYfZ  
 DB_NAME = Database  
