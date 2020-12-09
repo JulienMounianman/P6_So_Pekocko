@@ -1,18 +1,20 @@
 const Sauce = require('../models/Sauce.js');
 const fs = require('fs');
 
+//Envoi de toute les sauces au front-end
 exports.getAllSauces = (req, res) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({ error }));
 };
 
+//Recherche une sauce en fonction de l'id en parametre et l'envoi au front-end
 exports.getOneSauces = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
 };
-
+//Créer une sauce à partir du body de la requetes
 exports.createSauce = (req, res) => {
     const sauce = new Sauce({
         ...JSON.parse(req.body.sauce),
@@ -26,7 +28,7 @@ exports.createSauce = (req, res) => {
         .then(() => res.status(201).json({ message: 'Sauce ajoutéé !' }))
         .catch(error => res.status(400).json({ error }));
 };
-
+//Modifie une sauce à partir du body de la requetes
 exports.updateSauce = (req, res) => {
     const sauce = req.file ?
         {
@@ -37,7 +39,7 @@ exports.updateSauce = (req, res) => {
         .then(() => res.status(200).json({ message: 'Sauce modifié !' }))
         .catch(error => res.status(400).json({ error }));
 }
-
+//Recherche une sauce en fonction de l'id en parametre et la supprime.
 exports.deleteOneSauce = (req, res) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
@@ -50,7 +52,7 @@ exports.deleteOneSauce = (req, res) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-
+//Gère les likes et dislikes des users sur les sauces.
 exports.updateLikeSauce = (req, res) => {
     if (req.body.like === 0) {
         Sauce.findOne({ _id: req.params.id })

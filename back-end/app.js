@@ -10,6 +10,7 @@ const router = express.Router();
 const uri = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@database.dhkdz.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true&w=majority";
 const helmet = require("helmet");
 
+//Connexion à la base de donnée Mongo
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
