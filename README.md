@@ -13,9 +13,9 @@ OpenClassrooms - Projet 6 - Développeur Web
 
 - Créer un fichier ".env" dans le dossier back-end.
 - Dans ce fichier, veuillez insérer ceux-ci :
-    DB_USERNAME = Admin
-    DB_PASSWORD = Bb48nCa4yFUFYfZ
-    DB_NAME = Database
+DB_USERNAME = Admin
+DB_PASSWORD = Bb48nCa4yFUFYfZ
+DB_NAME = Database
 
 
 - Lancer l'Api.
