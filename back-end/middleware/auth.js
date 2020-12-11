@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+//Récupére et verifie le Token du headers.
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

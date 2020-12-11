@@ -28,7 +28,7 @@ exports.createSauce = (req, res) => {
         .then(() => res.status(201).json({ message: 'Sauce ajoutéé !' }))
         .catch(error => res.status(400).json({ error }));
 };
-//Modifie une sauce à partir du body de la requetes
+//Modifie une sauce à partir du body de la requete
 exports.updateSauce = (req, res) => {
     const sauce = req.file ?
         {
