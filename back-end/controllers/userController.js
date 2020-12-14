@@ -27,7 +27,7 @@ exports.login = (req, res) => {
               token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' })
             })
           } else {
-            res.status(401).json("Mot de passe incorrect ", err);
+            res.status(401).json(err);
           }
       })     
     })
