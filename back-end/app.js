@@ -9,6 +9,7 @@ require('dotenv').config()
 const router = express.Router();
 const uri = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@database.dhkdz.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true&w=majority";
 const helmet = require("helmet");
+const xss = require('xss-clean');
 
 //Connexion à la base de donnée Mongo
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,21 +18,21 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const app = express();
 
-router.use((req, res, next) => {
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(helmet());
+app.use(xss())
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 
-//limite de session
+
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100 
